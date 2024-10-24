@@ -1,0 +1,17 @@
+com\mycompany\app\my_app_simple\model\Order.class
+com\mycompany\app\my_app_simple\service\OrderService.class
+com\mycompany\app\my_app_simple\HelloController.class
+com\mycompany\app\my_app_simple\controller\ProductController.class
+com\mycompany\app\my_app_simple\model\Product.class
+com\mycompany\app\my_app_simple\repository\CustomerRepository.class
+com\mycompany\app\my_app_simple\repository\OrderItemRepository.class
+com\mycompany\app\my_app_simple\App.class
+com\mycompany\app\my_app_simple\dto\OrderDTO.class
+com\mycompany\app\my_app_simple\model\OrderItem.class
+com\mycompany\app\my_app_simple\repository\ProductRepository.class
+com\mycompany\app\my_app_simple\model\Customer.class
+com\mycompany\app\my_app_simple\dto\CustomerOrdersDTO.class
+com\mycompany\app\my_app_simple\repository\OrderRepository.class
+com\mycompany\app\my_app_simple\service\ProductService.class
+com\mycompany\app\my_app_simple\controller\OrderController.class
+com\mycompany\app\my_app_simple\MySpringBootApp.class
