@@ -23,7 +23,7 @@ public class ProductController {
         return productService.getAllProducts();
     }
     
- // 新增產品
+    // 新增產品
     @PostMapping(value = "/addProduct", consumes = "application/json", produces = "application/json")
     public Product addProduct(@RequestBody Product product) {
         return productService.addProduct(product);

@@ -1,45 +1,47 @@
 package com.mycompany.app.my_app_simple.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-import com.mycompany.app.my_app_simple.service.OrderService;
+import com.mycompany.app.my_app_simple.model.Customer;
 import com.mycompany.app.my_app_simple.model.Order;
+import com.mycompany.app.my_app_simple.service.OrderService;
 
 @RestController
-@RequestMapping("/orders")
+@RequestMapping("/api")
 public class OrderController {
-
     @Autowired
     private OrderService orderService;
 
-    // 取得該客戶的所有訂單
-    @GetMapping(value = "/getOrder", produces = "application/json")
-    public ResponseEntity<List<Order>> getOrder(@RequestParam Long customerId) {
-        List<Order> orders = orderService.getOrdersByCustomerId(customerId);
-        return ResponseEntity.ok(orders);
+    @PostMapping("/getOrder")
+    public ResponseEntity<Order> getOrder(@RequestParam Long orderId) {
+        return orderService.getOrder(orderId)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
-    // 新增該客戶訂單
     @PostMapping("/addOrder")
     public ResponseEntity<Order> addOrder(@RequestBody Order order) {
-        Order createdOrder = orderService.addOrder(order);
-        return ResponseEntity.ok(createdOrder);
+        Order savedOrder = orderService.addOrder(order);
+        return ResponseEntity.ok(savedOrder);
     }
-
-    // 刪除該客戶訂單
+    
     @PostMapping("/removeOrder")
     public ResponseEntity<Void> removeOrder(@RequestParam Long orderId) {
         orderService.removeOrder(orderId);
         return ResponseEntity.noContent().build();
     }
 
-    // 取得所有客戶及訂單
     @PostMapping("/getCustomerAndOrder")
-    public ResponseEntity<List<Order>> getCustomerAndOrder() {
-        List<Order> orders = orderService.getAllOrders();
-        return ResponseEntity.ok(orders);
+    public ResponseEntity<List<Customer>> getCustomerAndOrder() {
+        List<Customer> customers = orderService.getCustomersWithOrders();
+        return ResponseEntity.ok(customers);
     }
 }

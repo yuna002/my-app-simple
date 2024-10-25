@@ -10,36 +10,53 @@ public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id")
     private Long productId;
 
-    @Column(nullable = false, length = 100)
-    private String name;
+    @Column(name="name",nullable = false, length = 100)
+    private String productName;
 
-    @Column(nullable = false)
+    @Column(name="price",nullable = false)
     private BigDecimal price;
-
+    
+    @Column(name="stock",nullable = false)
+    private Integer stock;
+    
+    
     // Getters and Setters
-    public Long getProductId() {
-        return productId;
-    }
 
-    public void setProductId(Long productId) {
-        this.productId = productId;
-    }
+	public Long getProductId() {
+		return productId;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public void setProductId(Long productId) {
+		this.productId = productId;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public String getProductName() {
+		return productName;
+	}
 
-    public BigDecimal getPrice() {
-        return price;
-    }
+	public void setProductName(String productName) {
+		this.productName = productName;
+	}
 
-    public void setPrice(BigDecimal price) {
-        this.price = price;
-    }
+	public BigDecimal getPrice() {
+		return price;
+	}
+
+	public void setPrice(BigDecimal price) {
+		this.price = price;
+	}
+
+	public Integer getStockQuantity() {
+		return stock;
+	}
+
+	public void setStockQuantity(Integer stock) {
+		this.stock = stock;
+	}
+
+  
+   
 }
