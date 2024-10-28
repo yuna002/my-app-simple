@@ -4332,3 +4332,5 @@
 2024-10-28T09:46:34.958+08:00 DEBUG 24216 --- [HikariPool-1 connection adder] o.p.core.v3.ConnectionFactoryImpl        : Send Buffer Size is 65,536
 2024-10-28T09:46:35.008+08:00 DEBUG 24216 --- [HikariPool-1 connection adder] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@54f2283e
 2024-10-28T09:46:35.052+08:00 DEBUG 24216 --- [HikariPool-1 connection adder] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Connection not added, stats (total=10, active=0, idle=10, waiting=0)
+2024-10-28T09:46:54.319+08:00 DEBUG 24216 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Pool stats (total=10, active=0, idle=10, waiting=0)
+2024-10-28T09:46:54.319+08:00 DEBUG 24216 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Fill pool skipped, pool has sufficient level or currently being filled.
