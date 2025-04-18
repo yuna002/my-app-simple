@@ -21,11 +21,6 @@ public class HelloController {
         return "test!";
     }
     
-    /*@PostMapping("/callback")
-    public String callback(@RequestBody String payload) {
-        // 處理接收到的 LINE Webhook 訊息
-        System.out.println("Received payload: " + payload);
-        return "OK";
-    }*/
+  
     
 }

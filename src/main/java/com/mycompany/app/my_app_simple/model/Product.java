@@ -1,9 +1,11 @@
 package com.mycompany.app.my_app_simple.model;
 
 import jakarta.persistence.*;
-import java.math.BigDecimal;
+import lombok.Getter;
+import lombok.Setter;
 
-
+@Getter
+@Setter
 @Entity
 @Table(name = "products")
 public class Product {
@@ -17,7 +19,7 @@ public class Product {
     private String productName;
 
     @Column(name="price",nullable = false)
-    private BigDecimal price;
+    private Integer price;
     
     @Column(name="stock",nullable = false)
     private Integer stock;
@@ -25,38 +27,5 @@ public class Product {
     
     // Getters and Setters
 
-	public Long getProductId() {
-		return productId;
-	}
-
-	public void setProductId(Long productId) {
-		this.productId = productId;
-	}
-
-	public String getProductName() {
-		return productName;
-	}
-
-	public void setProductName(String productName) {
-		this.productName = productName;
-	}
-
-	public BigDecimal getPrice() {
-		return price;
-	}
-
-	public void setPrice(BigDecimal price) {
-		this.price = price;
-	}
-
-	public Integer getStockQuantity() {
-		return stock;
-	}
-
-	public void setStockQuantity(Integer stock) {
-		this.stock = stock;
-	}
-
-  
    
 }

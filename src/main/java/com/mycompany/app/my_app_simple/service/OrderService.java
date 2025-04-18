@@ -24,10 +24,6 @@ public class OrderService {
     public Optional<Order> getOrder(Long orderId) {
         return orderRepository.findById(orderId);
     }
-
-    /*public Order addOrder(Order order) {
-        return orderRepository.save(order);
-    }*/
     
     public Order addOrder(Order order) {
         // 確保設置每個 OrderItem 的 order 屬性
