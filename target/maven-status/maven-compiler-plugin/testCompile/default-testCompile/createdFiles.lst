@@ -1,1 +1,3 @@
+com\mycompany\app\my_app_simple\service\CoindeskServiceTest.class
 com\mycompany\app\my_app_simple\AppTest.class
+com\mycompany\app\my_app_simple\controller\CurrencyMappingControllerIntegrationTest.class
