@@ -15,4 +15,14 @@ public class CurrencyMapping {
 	private String code;
 	private String englishName;
 	private String chineseName;
+	
+	@Override
+    public String toString() {
+        return "CurrencyMapping{" +
+                "code='" + code + '\'' +
+                ", englishName='" + englishName + '\'' +
+                ", chineseName='" + chineseName + '\'' +
+                '}';
+    }
+	
 }

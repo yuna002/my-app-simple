@@ -23,7 +23,7 @@ import com.mycompany.app.my_app_simple.model.CurrencyMapping;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @ActiveProfiles("test")  // 指定使用 application-test.properties
-public class CurrencyMappingControllerIntegrationTest {
+public class CurrencyControllerTest {
 
     @Autowired
     private TestRestTemplate restTemplate;
