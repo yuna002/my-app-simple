@@ -1,49 +1,34 @@
 pipeline {
-  agent any
+    agent any
 
-  environment {
-    TELEGRAM_TOKEN = credentials('TELEGRAM_BOT_TOKEN')
-    TELEGRAM_CHAT = credentials('TELEGRAM_CHAT')
-  }
+    environment {
+        IMAGE_NAME = 'my-app-simple'
+        IMAGE_TAG = 'latest'
+    }
 
-  stages {
-    stage('Build & Deploy') {
-      steps {
-        script {
-          // 你的 Minikube 部署步驟
-          sh '''
-            eval $(minikube docker-env)
-            docker build -t springboot-app:latest .
-            kubectl apply -f k8s/deployment.yaml
-          '''
+    stages {
+        stage('Build Jar') {
+            steps {
+                sh 'mvn clean package -DskipTests'
+            }
         }
-      }
-    }
 
-    stage('Notify Success') {
-      steps {
-        script {
-          def message = URLEncoder.encode("✅ Jenkins 部署成功", "UTF-8")
-          sh """
-            curl -s -X POST https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage \\
-              -d chat_id=${TELEGRAM_CHAT_ID} \\
-              -d text="${message}"
-          """
+        stage('Docker Build') {
+            steps {
+                sh '''
+                eval $(minikube docker-env)
+                docker build -t $IMAGE_NAME:$IMAGE_TAG .
+                '''
+            }
         }
-      }
-    }
-  }
 
-  post {
-    failure {
-      script {
-        def message = URLEncoder.encode("❌ Jenkins 部署失敗", "UTF-8")
-        sh """
-          curl -s -X POST https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage \\
-            -d chat_id=${TELEGRAM_CHAT_ID} \\
-            -d text="${message}"
-        """
-      }
+        stage('Deploy to Minikube') {
+            steps {
+                sh '''
+                kubectl apply -f k8s/deployment.yaml
+                kubectl apply -f k8s/service.yaml
+                '''
+            }
+        }
     }
-  }
 }

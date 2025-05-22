@@ -5,10 +5,10 @@ FROM openjdk:17-jdk-slim
 WORKDIR /app
 
 # 複製本機 JAR 檔到容器中
-COPY my-app-simple-0.0.1-SNAPSHOT.jar app.jar
+COPY target/my-app-simple-0.0.1-SNAPSHOT.jar app.jar
 
 # 開放應用埠
 EXPOSE 8090
 
 # 啟動指令
-ENTRYPOINT ["java", "-jar", "/app/app.jar"]
+ENTRYPOINT ["java", "-jar", "app.jar"]
