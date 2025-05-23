@@ -17,6 +17,7 @@ pipeline {
             steps {
                 sh '''
                 eval $(minikube docker-env)
+				docker ps
                 docker build -t $IMAGE_NAME:$IMAGE_TAG .
                 '''
             }
