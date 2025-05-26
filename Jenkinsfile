@@ -1,34 +1,18 @@
 pipeline {
     agent any
 
-    environment {
-        IMAGE_NAME = 'my-app-simple'
-        IMAGE_TAG = 'latest'
-    }
-
     stages {
-        stage('Build Jar') {
+	
+		stage('Build') {
             steps {
-                sh 'mvn clean package -DskipTests'
+                sh 'ls -la'
+                sh 'mvn clean package'  
             }
         }
-
-        stage('Docker Build') {
+		
+        stage('Archive') {
             steps {
-                sh '''
-                eval $(minikube docker-env)
-				docker ps
-                docker build -t $IMAGE_NAME:$IMAGE_TAG .
-                '''
-            }
-        }
-
-        stage('Deploy to Minikube') {
-            steps {
-                sh '''
-                kubectl apply -f k8s/deployment.yaml
-                kubectl apply -f k8s/service.yaml
-                '''
+                archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
             }
         }
     }
