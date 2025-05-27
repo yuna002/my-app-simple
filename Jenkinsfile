@@ -31,10 +31,7 @@ pipeline {
         stage('Load Image to Minikube') {
             steps {
                 script {
-                    sh '''
-                        eval $(minikube docker-env)
-                        minikube image load ${IMAGE_NAME}:${IMAGE_TAG}
-                    '''
+                    sh "/usr/local/bin/minikube image load ${IMAGE_NAME}:${IMAGE_TAG}"
                 }
             }
         }
