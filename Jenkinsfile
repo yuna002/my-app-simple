@@ -2,8 +2,8 @@ pipeline {
     agent any
 
     environment {
-        IMAGE_NAME = "my-springboot-app"      // 你的 image 名稱，可自訂
-        IMAGE_TAG  = "${env.BUILD_NUMBER}"    // 使用 Jenkins build 編號作為 tag
+        IMAGE_NAME = "my-springboot-app"
+        IMAGE_TAG  = "${env.BUILD_NUMBER}"
     }
 
     stages {
@@ -13,48 +13,41 @@ pipeline {
             }
         }
 
-        stage('Build') {
+        stage('Build JAR') {
             steps {
                 sh 'mvn clean package -DskipTests'
             }
         }
 
-        stage('Build Docker Image') {
-            steps {
-                script {
-					echo "Building image: ${IMAGE_NAME}:${IMAGE_TAG}"
-                    sh "docker build -t ${IMAGE_NAME}:${IMAGE_TAG} ."
-                }
-            }
-        }
-
-        stage('Load Image to Minikube') {
+        stage('Build Docker Image in Minikube') {
             steps {
                 script {
                     sh '''
-						export PATH=$PATH:/usr/local/bin
-						eval $(minikube -p minikube docker-env)
-						docker images
-						docker tag ${IMAGE_NAME}:${IMAGE_TAG} my-springboot-app:${BUILD_NUMBER}
-						docker image ls
-					'''
+                        export PATH=$PATH:/usr/local/bin
+                        eval $(minikube -p minikube docker-env)
+                        echo "Building image: ${IMAGE_NAME}:${IMAGE_TAG}"
+                        docker build -t ${IMAGE_NAME}:${IMAGE_TAG} .
+                        docker images | grep ${IMAGE_NAME}
+                    '''
                 }
             }
         }
 
         stage('Deploy to Minikube') {
             steps {
-                // 替換 deployment.yaml 中的 image tag（用簡單方式）
-                sh "sed -i 's|image: .*|image: ${IMAGE_NAME}:${IMAGE_TAG}|' k8s/deployment.yaml"
+                script {
+                    // 替換 image tag
+                    sh "sed -i 's|image: .*|image: ${IMAGE_NAME}:${IMAGE_TAG}|' k8s/deployment.yaml"
 
-                // 刪除舊資源並套用新的
-                sh '''
-                    kubectl delete -f k8s/deployment.yaml --ignore-not-found
-                    kubectl delete -f k8s/service.yaml --ignore-not-found
-                    kubectl apply -f k8s/deployment.yaml
-                    kubectl apply -f k8s/service.yaml
-                    kubectl get svc
-                '''
+                    // 部署
+                    sh '''
+                        kubectl delete -f k8s/deployment.yaml --ignore-not-found
+                        kubectl delete -f k8s/service.yaml --ignore-not-found
+                        kubectl apply -f k8s/deployment.yaml
+                        kubectl apply -f k8s/service.yaml
+                        kubectl get svc
+                    '''
+                }
             }
         }
     }
