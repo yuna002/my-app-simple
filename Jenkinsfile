@@ -30,8 +30,12 @@ pipeline {
 
         stage('Load Image to Minikube') {
             steps {
-                // 把剛建好的 image 載入 Minikube，讓 k8s 可以找到它
-                sh "minikube image load ${IMAGE_NAME}:${IMAGE_TAG}"
+                script {
+                    sh '''
+                        eval $(minikube docker-env)
+                        minikube image load ${IMAGE_NAME}:${IMAGE_TAG}
+                    '''
+                }
             }
         }
 
