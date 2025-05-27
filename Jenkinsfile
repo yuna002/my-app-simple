@@ -31,7 +31,13 @@ pipeline {
         stage('Load Image to Minikube') {
             steps {
                 script {
-                    sh "/usr/local/bin/minikube image load ${IMAGE_NAME}:${IMAGE_TAG}"
+                    sh '''
+						export PATH=$PATH:/usr/local/bin
+						eval $(minikube -p minikube docker-env)
+						docker images
+						docker tag ${IMAGE_NAME}:${IMAGE_TAG} my-springboot-app:${BUILD_NUMBER}
+						docker image ls
+					'''
                 }
             }
         }
