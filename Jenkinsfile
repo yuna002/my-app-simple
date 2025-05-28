@@ -4,6 +4,8 @@ pipeline {
     environment {
         IMAGE_NAME = "my-springboot-app"
         IMAGE_TAG  = "${env.BUILD_NUMBER}"
+		BOT_TOKEN = credentials('TELEGRAM_BOT_TOKEN')
+        CHAT_ID   = credentials('TELEGRAM_CHAT_ID')
     }
 
     stages {
@@ -56,5 +58,23 @@ pipeline {
         always {
             archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
         }
+		success {
+			script {
+				sh """
+					curl -s -X POST https://api.telegram.org/bot${BOT_TOKEN}/sendMessage \\
+						-d chat_id=${CHAT_ID} \\
+						-d text="✅ Jenkins 部署成功：Job '${env.JOB_NAME}' #${env.BUILD_NUMBER} 完成！"
+				"""
+			}
+		}
+		failure {
+			script {
+				sh """
+					curl -s -X POST https://api.telegram.org/bot${BOT_TOKEN}/sendMessage \\
+						-d chat_id=${CHAT_ID} \\
+						-d text="❌ Jenkins 部署失敗：Job '${env.JOB_NAME}' #${env.BUILD_NUMBER} 出錯！"
+				"""
+			}
+		}
     }
 }
