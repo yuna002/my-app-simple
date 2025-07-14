@@ -1,19 +1,23 @@
 pipeline {
-  agent any
-  stages {
+    agent any
 
-    stage('Check Path') {
-    steps {
-        sh 'echo $PATH'
-        sh 'which mvn'
-        sh 'mvn -v'
+    environment {
+        PATH = "/usr/share/maven/bin:${env.PATH}"
     }
-}
 
-    stage('Build') {
-      steps {
-        sh 'mvn clean package -DskipTests'
-      }
+    stages {
+        stage('Check Path') {
+            steps {
+                sh 'echo $PATH'
+                sh 'which mvn'
+                sh 'mvn -v'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                sh 'mvn clean package -DskipTests'
+            }
+        }
     }
-  }
 }
