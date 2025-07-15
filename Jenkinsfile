@@ -1,9 +1,9 @@
 pipeline {
     agent any
 
-    triggers {
+    /*triggers {
     cron('H/20 * * * *')
-    }
+    }*/
 
     environment {
         PATH = "/usr/share/maven/bin:${env.PATH}"
