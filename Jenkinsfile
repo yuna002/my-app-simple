@@ -4,8 +4,6 @@ pipeline {
     environment {
         IMAGE_NAME = "my-springboot-app"
         IMAGE_TAG  = "${env.BUILD_NUMBER}"
-		BOT_TOKEN = credentials('TELEGRAM_BOT_TOKEN')
-        CHAT_ID   = credentials('TELEGRAM_CHAT_ID')
     }
 
     stages {
@@ -41,7 +39,7 @@ pipeline {
                     // 替換 image tag
                     sh "sed -i 's|image: .*|image: ${IMAGE_NAME}:${IMAGE_TAG}|' k8s/deployment.yaml"
 
-                    // 部署
+                    // 部署到 Minikube
                     sh '''
                         kubectl delete -f k8s/deployment.yaml --ignore-not-found
                         kubectl delete -f k8s/service.yaml --ignore-not-found
@@ -58,23 +56,5 @@ pipeline {
         always {
             archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
         }
-		success {
-			script {
-				sh """
-					curl -s -X POST https://api.telegram.org/bot${BOT_TOKEN}/sendMessage \\
-						-d chat_id=${CHAT_ID} \\
-						-d text="✅ Jenkins 部署成功：Job '${env.JOB_NAME}' #${env.BUILD_NUMBER} 完成！"
-				"""
-			}
-		}
-		failure {
-			script {
-				sh """
-					curl -s -X POST https://api.telegram.org/bot${BOT_TOKEN}/sendMessage \\
-						-d chat_id=${CHAT_ID} \\
-						-d text="❌ Jenkins 部署失敗：Job '${env.JOB_NAME}' #${env.BUILD_NUMBER} 出錯！"
-				"""
-			}
-		}
     }
 }
