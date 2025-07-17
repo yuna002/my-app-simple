@@ -1,5 +1,6 @@
 pipeline {
     agent any
+    //agent none
 
     environment {
         IMAGE_NAME = "my-springboot-app"
@@ -34,6 +35,7 @@ pipeline {
         }
 
         stage('Deploy to Minikube') {
+            agent { label 'minikube' }
             steps {
                 script {
                     // 替換 image tag
