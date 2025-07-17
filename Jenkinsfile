@@ -5,6 +5,7 @@ pipeline {
     environment {
         IMAGE_NAME = "my-springboot-app"
         IMAGE_TAG  = "${env.BUILD_NUMBER}"
+        KUBECONFIG = "${env.WORKSPACE}/.kube/config"
     }
 
     stages {
@@ -24,9 +25,6 @@ pipeline {
             steps {
                 script {
                     sh '''
-                        export PATH=$PATH:/usr/local/bin
-                        eval $(minikube -p minikube docker-env)
-                        echo "Building image: ${IMAGE_NAME}:${IMAGE_TAG}"
                         docker build -t ${IMAGE_NAME}:${IMAGE_TAG} .
                         docker images | grep ${IMAGE_NAME}
                     '''
@@ -35,11 +33,8 @@ pipeline {
         }
 
         stage('Deploy to Minikube') {
-            agent { label 'minikube' }
             steps {
                 script {
-                    // 替換 image tag
-                    sh "sed -i 's|image: .*|image: ${IMAGE_NAME}:${IMAGE_TAG}|' k8s/deployment.yaml"
 
                     // 部署到 Minikube
                     sh '''
