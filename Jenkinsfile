@@ -9,27 +9,6 @@ pipeline {
     }
 
     stages {
-
-        stage('Prepare kubeconfig') {
-            steps {
-                script {
-                    sh '''
-                        echo "Preparing kubeconfig..."
-                        mkdir -p /var/jenkins_home/.kube
-
-                         if [ -f /var/jenkins_home/.kube/config ]; then
-                             sed -i 's|/home/ub|/var/jenkins_home|g' /var/jenkins_home/.kube/config
-                         else
-                             echo "WARNING: kube config not found!"
-                             exit 1
-                         fi
-
-                    '''
-                }
-            }
-        }
-
-
         stage('Checkout') {
             steps {
                 checkout scm
