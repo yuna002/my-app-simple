@@ -5,7 +5,7 @@ pipeline {
     environment {
         IMAGE_NAME = "my-springboot-app"
         IMAGE_TAG  = "${env.BUILD_NUMBER}"
-        KUBECONFIG = "${env.WORKSPACE}/.kube/config"
+        KUBECONFIG = '/var/jenkins_home/.kube/config'
     }
 
     stages {
