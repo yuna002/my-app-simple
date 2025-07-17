@@ -9,6 +9,23 @@ pipeline {
     }
 
     stages {
+
+        stage('Prepare kubeconfig') {
+            steps {
+                script {
+                    sh '''
+                        echo "Copying kubeconfig..."
+                        mkdir -p /var/jenkins_home/.kube
+                        cp /mnt/kube/config /var/jenkins_home/.kube/config
+
+                        echo "Fixing paths..."
+                        sed -i 's|/home/ub|/var/jenkins_home|g' /var/jenkins_home/.kube/config
+                    '''
+                }
+            }
+        }
+
+
         stage('Checkout') {
             steps {
                 checkout scm
