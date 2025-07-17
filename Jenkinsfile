@@ -14,12 +14,16 @@ pipeline {
             steps {
                 script {
                     sh '''
-                        echo "Copying kubeconfig..."
+                        echo "Preparing kubeconfig..."
                         mkdir -p /var/jenkins_home/.kube
-                        cp /mnt/kube/config /var/jenkins_home/.kube/config
 
-                        echo "Fixing paths..."
-                        sed -i 's|/home/ub|/var/jenkins_home|g' /var/jenkins_home/.kube/config
+                         if [ -f /var/jenkins_home/.kube/config ]; then
+                             sed -i 's|/home/ub|/var/jenkins_home|g' /var/jenkins_home/.kube/config
+                         else
+                             echo "WARNING: kube config not found!"
+                             exit 1
+                         fi
+
                     '''
                 }
             }
