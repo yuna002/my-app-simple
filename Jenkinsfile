@@ -3,7 +3,7 @@ pipeline {
     //agent none
 
     environment {
-        IMAGE_NAME = "my-springboot-app"
+        IMAGE_NAME = "springboot-app"
         IMAGE_TAG  = "${env.BUILD_NUMBER}"
         KUBECONFIG = '/jenkins-kube/config'
     }
