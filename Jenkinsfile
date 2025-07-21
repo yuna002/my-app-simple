@@ -25,6 +25,7 @@ pipeline {
             steps {
                 script {
                     sh '''
+                        eval $(minikube docker-env)
                         docker build -t ${IMAGE_NAME}:${IMAGE_TAG} .
                         docker images | grep ${IMAGE_NAME}
                     '''
