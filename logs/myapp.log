@@ -24,3 +24,32 @@
 2025-07-22T11:18:07.664+08:00  INFO 43532 --- [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 3 endpoints beneath base path '/actuator'
 2025-07-22T11:18:07.809+08:00  INFO 43532 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8090 (http) with context path '/'
 2025-07-22T11:18:07.832+08:00  INFO 43532 --- [main] c.m.app.my_app_simple.MySpringBootApp    : Started MySpringBootApp in 8.298 seconds (process running for 19.416)
+2025-07-22T11:21:31.412+08:00  INFO 41288 --- [main] c.m.app.my_app_simple.MySpringBootApp    : Starting MySpringBootApp using Java 17.0.15 with PID 41288 (D:\eclipse-workspace\my-app-simple\target\classes started by Administrator in D:\eclipse-workspace\my-app-simple)
+2025-07-22T11:21:31.414+08:00  INFO 41288 --- [main] c.m.app.my_app_simple.MySpringBootApp    : The following 1 profile is active: "dev"
+2025-07-22T11:21:32.495+08:00  INFO 41288 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-07-22T11:21:32.583+08:00  INFO 41288 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 79 ms. Found 5 JPA repository interfaces.
+2025-07-22T11:21:33.574+08:00  INFO 41288 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8090 (http)
+2025-07-22T11:21:33.589+08:00  INFO 41288 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-07-22T11:21:33.590+08:00  INFO 41288 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.30]
+2025-07-22T11:21:33.678+08:00  INFO 41288 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-07-22T11:21:33.679+08:00  INFO 41288 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2207 ms
+2025-07-22T11:21:33.896+08:00  INFO 41288 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-07-22T11:21:34.170+08:00  INFO 41288 --- [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:devdb user=SA
+2025-07-22T11:21:34.174+08:00  INFO 41288 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-07-22T11:21:34.185+08:00  INFO 41288 --- [main] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:devdb'
+2025-07-22T11:21:34.468+08:00  INFO 41288 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-07-22T11:21:34.532+08:00  INFO 41288 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.3.Final
+2025-07-22T11:21:34.575+08:00  INFO 41288 --- [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-07-22T11:21:35.011+08:00  INFO 41288 --- [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-07-22T11:21:35.113+08:00  WARN 41288 --- [main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-07-22T11:21:36.145+08:00  INFO 41288 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-07-22T11:21:36.198+08:00  INFO 41288 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-07-22T11:21:36.661+08:00  INFO 41288 --- [main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-07-22T11:21:37.415+08:00  WARN 41288 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-07-22T11:21:37.468+08:00  INFO 41288 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
+2025-07-22T11:21:39.094+08:00  INFO 41288 --- [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 3 endpoints beneath base path '/actuator'
+2025-07-22T11:21:39.293+08:00  INFO 41288 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8090 (http) with context path '/'
+2025-07-22T11:21:39.329+08:00  INFO 41288 --- [main] c.m.app.my_app_simple.MySpringBootApp    : Started MySpringBootApp in 8.383 seconds (process running for 8.885)
+2025-07-22T11:21:56.972+08:00  INFO 41288 --- [http-nio-8090-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-07-22T11:21:56.972+08:00  INFO 41288 --- [http-nio-8090-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-07-22T11:21:56.974+08:00  INFO 41288 --- [http-nio-8090-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
